@@ -1,4 +1,6 @@
-export const PackageGroupType={
+export class PackageGroupType{
+
+public static packageGroupType ={
 "DangerousGoodsLimitation" :"DangerousGoodsLimitation_collection",
 "DangerousGoodsQuantity?": "DangerousGoodsQuantity_collection",
 "DangerousGoodsUNNumber?": "DangerousGoodsUNNumber_collection",
@@ -12,3 +14,5 @@ export const PackageGroupType={
 "ProperShippingName?": "ProperShippingName_collection",
 "TransportRadiationLevelIndex?": "TransportRadiationLevelIndex_collection"
 };
+
+}

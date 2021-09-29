@@ -1,1 +1,3 @@
-export {transformFixmToAcris} from './lib/parser' ;
+import { FixmParser } from './lib/parser' ;
+
+export default FixmParser;

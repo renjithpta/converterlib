@@ -1,4 +1,6 @@
-export const AircraftMovementRoute ={
+export class AircraftMovementRoute {
+    
+public static aircraftMovementRoute = {
 "Identifier":["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:point4D","fx:pointProperty","fx:reference","fx:identifier"],
 "airfileRouteStartTime":["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:routeInformation","fx:airfileRouteStartTime"], 
 "alongRouteDistance":"alongRouteDistance_collection",
@@ -28,3 +30,5 @@ export const AircraftMovementRoute ={
 "verticalRange":"VerticalRange_collection",
 "rankedTrajectoryIdentifier":["fx:Flight","fx:routeTrajectoryGroup","fx:ranked","fx:identifier"]
 };
+
+}

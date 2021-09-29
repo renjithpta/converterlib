@@ -1,4 +1,6 @@
-export const RouteConstraint = {
+export class RouteConstraint {
+
+    public static routeConstraint ={
     "departureOrArrivalCode": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:constraint","fx:departureOrArrivalIndicator"],
     "description": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:constraint","fx:description"],
     "levelConstraintActivation": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:routeChange","fx:level","fx:activation"],
@@ -6,4 +8,6 @@ export const RouteConstraint = {
     "restrictionReference": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:constraint","fx:restrictionReference"],
     "timeConstraintCondition": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:constraint","fx:time","fx:condition"],
     "timeSpecification": ["fx:Flight","fx:routeTrajectoryGroup","fx:agreed","fx:element","fx:constraint","fx:time","fx:timeSpecification"]
+};
+
 }

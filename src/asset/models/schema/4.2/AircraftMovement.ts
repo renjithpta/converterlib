@@ -1,4 +1,5 @@
-export const AircraftMovement ={
+export class AircraftMovement{
+public static aircraftMovement = {
     "actualTimeOfArrival" : ["fx:Flight","fx:arrival","fx:actualTimeOfArrival"],
     "actualTimeOfDeparture" : ["fx:Flight","fx:departure","fx:actualTimeOfDeparture"] ,
     "alternateAirport" :["fx:Flight","fx:arrival","fx:alternateAerodrome","locationIndicator"],
@@ -43,6 +44,8 @@ export const AircraftMovement ={
     ,"takeOffAlternateAerodrome":"takeOffAlternateAerodrome_collection"
     ,"aircraftApproachCategory":["fx:Flight","fx:aircraft","fx:aircraftApproachCategory"]
 
+
+};
 
 }
 

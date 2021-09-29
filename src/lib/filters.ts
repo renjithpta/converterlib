@@ -1,21 +1,20 @@
-import { KEYS_REMOVABLE, TAGS_REMOVABLE } from "./constants";
-import { isEmpty, keyPresent } from "./objecthandler";
+import { Constants } from "./constants";
+import { ObjectHandler} from "./objecthandler";
+export class Filter {
 
-
-export const removeUnwantedKeys=(dataValue : any)=>{
-    KEYS_REMOVABLE.forEach(key=>{
-        if(keyPresent(dataValue,key)){
+public static removeUnwantedKeys(dataValue : any): void{
+    Constants.KEYS_REMOVABLE.forEach( (key: any) =>{
+        if(ObjectHandler.keyPresent(dataValue,key)){
             delete dataValue[key] ;
          }
     })
 
 }
 
+public static removeTag(objValue:any):void{
 
-
-export const removeTag=(objValue:any)=>{
     Object.keys(objValue).forEach(key=>{
-        TAGS_REMOVABLE.forEach(tagValue=>{
+        Constants.TAGS_REMOVABLE.forEach( (tagValue: any) =>{
             if(key.includes(tagValue)){
                 const newKey = key.replace(tagValue,'');
                 objValue[newKey] = objValue[key];
@@ -26,31 +25,35 @@ export const removeTag=(objValue:any)=>{
     })
 }
 
-export const removeEmptyFields=(obj:any)=>{
+public static removeEmptyFields(obj:any): void{
+
     Object.keys(obj).forEach(key=>{
+        
         if (!/\S/.test(obj[key])) {
             delete obj[key];
         }
-    })
+    });
 }
 
 
-export const  removeSingleArray=(obj:any)=>{
+public static removeSingleArray(obj:any): void{
+
     Object.keys(obj).forEach(key=>{
         if(Array.isArray(obj[key])){
             if(obj[key].length === 1){
                 obj[key] = obj[key][0];
             }
         }
-    })
+    });
 }
 
-export const removeEmptyObject=(key:any,value:any,obj:any)=>{
-    if(isEmpty(value)){
+public static removeEmptyObject(key:any,value:any,obj:any): void{
+    if(ObjectHandler.isEmpty(value)){
         delete obj[key];
     }
 }
-export const removeEmptyArrays=(key:any,value:any,obj:any)=>{
+
+public static removeEmptyArrays(key:any,value:any,obj:any): void{
     if(Array.isArray(value)){
         if(value.length === 0){
                 delete obj[key];
@@ -60,10 +63,15 @@ export const removeEmptyArrays=(key:any,value:any,obj:any)=>{
 
 }
 
-export const removeEmptyKeyFields=(obj:any)=>{
-        Object.keys(obj).forEach(key=>{
-            if(isEmpty(obj[key])){
+public static removeEmptyKeyFields(obj:any): void{
+    
+    Object.keys(obj).forEach(key=>{
+            if(ObjectHandler.isEmpty(obj[key])){
                 delete obj[key];
             }
-        })
+        });
+
+}
+
+
 }

@@ -1,8 +1,11 @@
-export const ICAO_KEYS = ["locationIndicator"];
-export const TAGS_REMOVABLE =["fx:","fb:"];
-export const KEYS_REMOVABLE = ["extension","$","xsi:type"];
-export const DEFAULT_VERSION = "4.2";
-export const initializeAcris = () : any=> {
+
+export class Constants{
+
+public  static ICAO_KEYS : any=["locationIndicator"];
+public static  TAGS_REMOVABLE: any =["fx:","fb:"];
+public static  KEYS_REMOVABLE: any = ["extension","$","xsi:type"];
+public  static DEFAULT_VERSION: string = "4.2";
+public  static initializeAcris() : any {
 
     return {
         "operatingAirline": {
@@ -40,3 +43,5 @@ export const initializeAcris = () : any=> {
         "extensions": {}
       }
 };
+
+}

@@ -1,11 +1,11 @@
-import { getAlternative } from "../asset/util";
-
-
+import { Utils } from "../asset/util";
 // tslint:disable-next-line: no-var-requires
 const IterateObject = require("iterate-object")
 
+export class ObjectHandler {
 
-export const getType=(object:any)=>{
+
+public static getType(object:any): any{
     if(Array.isArray(object)){
         return 'array' ;
     }else{
@@ -14,13 +14,13 @@ export const getType=(object:any)=>{
 }
 
 
-export const JSONify=(data :any)=>{
+public static JSONify(data :any): any{
     return JSON.parse(JSON.stringify(data));
 }
 
 
-const getDataFromObject=(dataObject : any,Key :any)=>{
-    Key = verifiedKey(dataObject,Key);
+public static getDataFromObject(dataObject : any,Key :any):any{
+    Key = this.verifiedKey(dataObject,Key);
     if(Key === null){
         return ''
     }
@@ -30,20 +30,20 @@ const getDataFromObject=(dataObject : any,Key :any)=>{
                 if(Array.isArray(keyValue)){
                     keyValue = keyValue[0];
                 }else{
-                    keyValue = JSONify(keyValue);
+                    keyValue = this.JSONify(keyValue);
                 }
                 break
             case 'undefined':
               
-                keyValue = ''
+                keyValue = '';
             }
     return keyValue;
 }
 
 
-export const fetchDataFromPath=(dataObj: any, keyList:string[])=>{
+public static fetchDataFromPath(dataObj: any, keyList:string[]): any{
     keyList.forEach(key =>{
-        dataObj = getDataFromObject(dataObj,key);
+        dataObj = ObjectHandler.getDataFromObject(dataObj,key);
     })
     if(Array.isArray(dataObj)){
         dataObj = dataObj[0];
@@ -53,40 +53,42 @@ export const fetchDataFromPath=(dataObj: any, keyList:string[])=>{
 }
 
 
-const verifiedKey= (dataObj :object,key:any)=>{
+public static verifiedKey(dataObj :object,key:any): any{
     if (!Array.isArray(dataObj)){
         if(dataObj.hasOwnProperty(key)){
             return key ;
         }else{
-            return tryAlternateKey(key) ;
+            return this.tryAlternateKey(key) ;
        }
     }
     
 }
 
-const tryAlternateKey=(key:string)=>{
-    const altKeys = getAlternative();
+public static tryAlternateKey(key:string): any{
+    const altKeys = Utils.getAlternative();
     if(altKeys.hasOwnProperty(key)){
         return altKeys[key] ;
+
     }else{
+
         return null ;
     }
 
 }
 
-export const generateCollectionFromObject=(collectionObject:any,Key:string,collectionDetails:any,iterObj:any):any=>{
+public static generateCollectionFromObject(collectionObject:any,Key:string,collectionDetails:any,iterObj:any):any{
   let CollectObj :any;
   const collectionKeySet = collectionDetails.keys
   let collectionBase = collectionDetails.base
   if(iterObj !== ''){
         IterateObject([iterObj],(value:any)=>{
-            switch (getType(value)){
+            switch (ObjectHandler.getType(value)){
                 case 'object':
-                        collectionBase = verifiedKey(value,collectionBase)
+                        collectionBase = this.verifiedKey(value,collectionBase)
                         if(collectionBase !== null){
                             CollectObj = value[collectionBase]
                             collectionKeySet.forEach((key:any)=>{
-                                CollectObj = collectKeys(CollectObj,key)
+                                CollectObj = this.collectKeys(CollectObj,key)
                             })
                             collectionObject[Key] = [CollectObj]
                             break
@@ -95,7 +97,7 @@ export const generateCollectionFromObject=(collectionObject:any,Key:string,colle
                             break
                         }
                 case 'array':
-                    generateCollectionFromObject(collectionObject,Key,collectionDetails,value)
+                    this.generateCollectionFromObject(collectionObject,Key,collectionDetails,value)
             }
         })
     }else{
@@ -106,10 +108,10 @@ export const generateCollectionFromObject=(collectionObject:any,Key:string,colle
 
 
 
-const collectKeys=(obj :any,Pkey:any)=>{
+public static collectKeys(obj :any,Pkey:any): any{
     const objectLst:any = []
     IterateObject(obj,(value:any)=>{
-        switch(getType(value)){
+        switch(this.getType(value)){
             case 'object':
                 Object.keys(value).forEach(key=>{
                     if(key === Pkey){
@@ -123,7 +125,7 @@ const collectKeys=(obj :any,Pkey:any)=>{
 }
 
 
-export const isEmpty=(obj:any) =>{
+public static isEmpty(obj:any): boolean{
     // tslint:disable-next-line: prefer-const
     for(let key in obj) {
         if(obj.hasOwnProperty(key))
@@ -132,6 +134,8 @@ export const isEmpty=(obj:any) =>{
     return true;
 }
 
-export const keyPresent=(srcObj:any,keyValue :string)=>{
+public static keyPresent(srcObj:any,keyValue :string): any{
     return srcObj.hasOwnProperty(keyValue) ;
+}
+
 }

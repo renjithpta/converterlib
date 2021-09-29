@@ -1,4 +1,7 @@
-export const alternativeTags = {
+
+export class AlternativeTag {
+
+public static alternativeTags: any = {
     "fx:Flight" : "fx:flight",
     "designatorIcao":"fb:designatorIcao",
     "fx:arrivalAerodrome" :"fx:destinationAerodrome",
@@ -9,4 +12,7 @@ export const alternativeTags = {
     "fx:negotiating":"fx:filed",
     "fx:desired":"fx:filed",
     "fx:icaoAircraftTypeDesignator":"fx:otherAircraftType"
+}
+
+
 }

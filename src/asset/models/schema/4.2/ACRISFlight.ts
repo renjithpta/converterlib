@@ -1,4 +1,6 @@
-export const ACRISFlight={"operatingAirline": {
+export class ACRISFlight {
+
+public static acrisFlight={"operatingAirline": {
 
   "icaoCode": ["fx:Flight","fx:operator","designatorIcao"],
   "name": ["fx:Flight","fx:operator","operatingOrganization","name"]
@@ -42,5 +44,7 @@ export const ACRISFlight={"operatingAirline": {
 
 }
 
+
+};
 
 }

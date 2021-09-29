@@ -1,5 +1,9 @@
-export const AircraftMovementIdentification ={
+export class AircraftMovementIdentification{
+    
+    public static aircraftMovementIdentification ={
     "aircraftIdentification": ["fx:Flight","fx:flightIdentification","fx:aircraftIdentification"] ,
     "aircraftIdentificationPrevious":["fx:Flight","fx:flightIdentification","fx:aircraftIdentificationPrevious"], 
     "globallyUniqueFlightIdentifier": ["fx:Flight","fx:gufi","_"]
+}
+
 }

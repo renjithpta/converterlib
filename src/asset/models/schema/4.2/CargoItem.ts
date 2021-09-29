@@ -1,4 +1,5 @@
-export const CargoItem = {
+export class CargoItem  {
+    public static cargoItem= {
     "AirWaybillNumber": "AirWaybillNumber_collection",
     "AircraftCargoLimitation": ["fx:Flight","fx:dangerousGoods","fx:packageGroup","fx:dangerousGoodsPackage","fx:dangerousGoodsLimitation"],
     "CompatibilityGroup": ["fx:Flight","fx:dangerousGoods","fx:packageGroup","fx:dangerousGoodsPackage","fx:compatibilityGroup"],
@@ -7,5 +8,7 @@ export const CargoItem = {
     "ShipmentAuthorisations": ["fx:Flight","fx:dangerousGoods","fx:shippingInformation","fx:shipmentAuthorizations"],
     "SubsidiaryHazardClassAndDivision": ["fx:Flight","fx:dangerousGoods","fx:shippingInformation","fx:subsidiaryHazardClassAndDivision"]
     ,"PackageGroupType":"PackageGroupType"
+};
+
 }
 

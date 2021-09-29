@@ -1,4 +1,5 @@
-export const icaoIataMapper = {"BAW":"BA",
+export class IcaoIataMapper{
+public static icaoIataMapper: any = {"BAW":"BA",
 "EGLL":"LHR",
 "LATI":"TIA",
 "DAAG":"ALG",
@@ -185,4 +186,6 @@ export const icaoIataMapper = {"BAW":"BA",
 "KIAD":"IAD",
 "DLH":"LH",
 "A346":"346"
+}
+
 }

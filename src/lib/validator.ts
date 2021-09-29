@@ -1,17 +1,17 @@
-import { getIATA } from '../asset/util' ;
-import {getType } from'./objecthandler' ;
-import { ICAO_KEYS } from './constants';
+import { Utils } from '../asset/util' ;
+import {ObjectHandler } from'./objecthandler' ;
+import { Constants } from './constants';
 // tslint:disable-next-line: no-var-requires
 const IterateObject = require("iterate-object")
+export class Validator {
 
-
-const formatAirportFacility = (obj:any)=>{
+public static formatAirportFacility (obj:any){
     try{
 
-    const iataCode = obj.extensions.AirportFacility.iataCode
+    const iataCode = obj.extensions.AirportFacility.iataCode;
     if(iataCode !== ""){
-        obj.extensions.AirportFacility.IATAIdentifier = iataCode
-        delete obj.extensions.AirportFacility.iataCode
+        obj.extensions.AirportFacility.IATAIdentifier = iataCode;
+        delete obj.extensions.AirportFacility.iataCode;
     }
 
     }catch(e){
@@ -21,55 +21,55 @@ const formatAirportFacility = (obj:any)=>{
 }
 
 
-export const formatFlightNumber = (obj:any) =>{
+public static  formatFlightNumber(obj:any):any{
     
-    const icaoCode = obj.flightNumber.airlineCode
-    const iataCode = toIATA(icaoCode.replace(/[0-9]/g, ''));
+    const icaoCode = obj.flightNumber.airlineCode;
+    const iataCode = Validator.toIATA(icaoCode.replace(/[0-9]/g, ''));
 
     if(!iataCode){
-        obj.flightNumber.airlineCode = icaoCode.replace(/[0-9]/g, '')
+        obj.flightNumber.airlineCode = icaoCode.replace(/[0-9]/g, '');
     }else{
-        obj.flightNumber.airlineCode = iataCode
+        obj.flightNumber.airlineCode = iataCode;
     }
 
     obj.flightNumber.trackNumber = icaoCode.replace(/\D/g,'');
     
-    return obj
+    return obj;
 }
 
 
 
-export const formatIcaoCodes = (dataValue:any)=>{
+public static formatIcaoCodes(dataValue:any): any{
     
     let iataData :any
     Object.keys(dataValue).forEach(key=>{
         if(key.toLowerCase().includes("icao") ){
-            const icaoData = dataValue[key]
-            switch (getType(icaoData)){
+            const icaoData = dataValue[key];
+            switch (ObjectHandler.getType(icaoData)){
                 case 'string':
-                    iataData = toIATA(icaoData)
+                    iataData = Validator.toIATA(icaoData);
                     break
                 case 'array':
-                    const iataArray :any = []
+                    const iataArray :any = [];
                     if (icaoData.length > 0){
                         icaoData.forEach((element:any) => {
-                            iataArray.push(toIATA(element))
+                            iataArray.push(Validator.toIATA(element));
                         });
-                        iataData = iataArray
+                        iataData = iataArray;
                         // if single entry array, trat it as string
                         if(iataArray.length === 1){
-                            dataValue[key] = icaoData[0]
-                            iataData = iataArray[0]
+                            dataValue[key] = icaoData[0];
+                            iataData = iataArray[0];
                         }
                     }else{
-                        iataData = []
+                        iataData = [];
                     }
                 break
             }
-            dataValue[key.replace(/icao/ig ,"iata")] = iataData
-        }else if(ICAO_KEYS.includes(key)){
+            dataValue[key.replace(/icao/ig ,"iata")] = iataData;
+        }else if(Constants.ICAO_KEYS.includes(key)){
             if (typeof dataValue[key] !== 'object'){
-                dataValue[key] = toIATA(dataValue[key])
+                dataValue[key] = Validator.toIATA(dataValue[key]);
             }
 
         }
@@ -78,16 +78,16 @@ export const formatIcaoCodes = (dataValue:any)=>{
     })
 }
 
-export const convertICAO = (obj:any)=>{
+public static convertICAO(obj:any): any{
     IterateObject(obj,(value: any)=> {
-        const type = getType(value)
+        const type = ObjectHandler.getType(value)
         switch (type){
             case 'object':
-                formatIcaoCodes(value);
+                Validator.formatIcaoCodes(value);
                 break;
                
             case 'array':
-                convertICAO(value);
+                Validator.convertICAO(value);
                 break;
                
         }
@@ -95,21 +95,24 @@ export const convertICAO = (obj:any)=>{
     return obj
 }
 
-export const validateObject = (obj:any)=>{
-    obj = convertICAO(obj)
-    formatFlightNumber(obj)
-    formatAirportFacility(obj)
+public static validateObject(obj:any): any{
+    obj = Validator.convertICAO(obj);
+    Validator.formatFlightNumber(obj);
+    Validator.formatAirportFacility(obj);
     return obj
 }
 
 
-export const toIATA = (icaoCode:string)=>{
-    const codeList = getIATA()
-    let IATAcode = codeList[icaoCode]
+public static toIATA(icaoCode:string): any{
+    const codeList = Utils.getIATA();
+    let IATAcode = codeList[icaoCode];
     if(IATAcode === undefined){
        
-        IATAcode = ''
+        IATAcode = '';
     }
-    return IATAcode
+    return IATAcode;
+
+}
+
 
 }

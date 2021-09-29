@@ -1,37 +1,40 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
-import {getType, keyPresent} from'./objecthandler' ;
-import * as FILTER from "./filters"
+import {ObjectHandler} from'./objecthandler' ;
+import {Filter} from "./filters"
 
 /* tslint:disable no-var-requires */
-const IterateObject = require("iterate-object")
+const IterateObject = require("iterate-object");
 
-const setTextValue= (dataValue:any)=>{
-    if(keyPresent(dataValue,"_")){
+export class Formatter{
+
+public static setTextValue(dataValue:any): any{
+    if(ObjectHandler.keyPresent(dataValue,"_")){
         dataValue.value = dataValue._
         delete dataValue._
     }
 
 }
 
-
-export const formatObject = (formatObj:any)=>{
+public static formatObject(formatObj:any): any{
     IterateObject(formatObj,(value: any,name:any)=> {
-        const type = getType(value)
+        const type = ObjectHandler.getType(value)
         switch (type){
             case 'object':
-                setTextValue(value)
-                FILTER.removeUnwantedKeys(value)
-                FILTER.removeTag(value)
-                FILTER.removeSingleArray(value)
-                FILTER.removeEmptyFields(value)
-                FILTER.removeEmptyArrays(name,value,formatObj)
-                FILTER.removeEmptyObject(name,value,formatObj)
+                Formatter.setTextValue(value)
+                Filter.removeUnwantedKeys(value);
+                Filter.removeTag(value);
+                Filter.removeSingleArray(value);
+                Filter.removeEmptyFields(value);
+                Filter.removeEmptyArrays(name,value,formatObj);
+                Filter.removeEmptyObject(name,value,formatObj);
+                break;
             case 'array':
-                formatObject(value)
+                Formatter.formatObject(value);
+                break;
         }
     })
-    FILTER.removeEmptyKeyFields(formatObj)
-    return formatObj
+    Filter.removeEmptyKeyFields(formatObj);
+    return formatObj;
 }
 
-
+}

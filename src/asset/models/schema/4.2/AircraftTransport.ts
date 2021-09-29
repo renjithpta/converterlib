@@ -1,4 +1,6 @@
-export const AircraftTransport={
+export class AircraftTransport{
+    
+    public static aircraftTransport ={
     
     "AircraftAddress":["fx:Flight","fx:aircraft","fx:aircraftAddress"],
     "formation":"AircraftTransportFormation",
@@ -28,3 +30,5 @@ export const AircraftTransport={
         "Registration" :["fx:Flight","fx:aircraft","fx:registration"]
     }
 };
+
+}

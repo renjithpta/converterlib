@@ -1,4 +1,6 @@
-export const AircraftMovementEmergency = {
+export class AircraftMovementEmergency{
+
+    public static aircraftMovementEmergency = {
     
     "actionTaken": ["fx:Flight","fx:emergency","fx:actionTaken"],
     "atsOriginatorIcaoIdentifier":["fx:Flight","fx:emergency","fx:originator","atcUnitNameOrAlternate"]
@@ -12,4 +14,6 @@ export const AircraftMovementEmergency = {
     "otherInformation":["fx:Flight","fx:emergency","fx:otherInformation"],
     "radioFailureRemarks":["fx:Flight","fx:radioCommunicationFailure","fx:radioFailureRemarks"],
     "remainingCommunicationCapability":["fx:Flight","fx:radioCommunicationFailure","fx:remainingComCapability"]
+};
+
 }

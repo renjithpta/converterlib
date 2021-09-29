@@ -1,4 +1,7 @@
-export const collections ={
+
+export class Collections {
+
+public static collectionsData ={
     "AircraftType_collection":{
         "keys":["fx:type","fx:icaoAircraftTypeDesignator"],
         "base":"fx:aircraftType",
@@ -215,4 +218,6 @@ export const collections ={
         "path":["fx:Flight","fx:routeTrajectoryGroup"],
         "keys":["fx:element","fx:point4D","fx:verticalRange"]
     }
+};
+
 }
